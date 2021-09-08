@@ -11,8 +11,6 @@ def open_and_read_file(file_path):
     """
     #iterate through the text file and concat each line as a string to the previous string
     
-    
-    
     return contents #'Contents of your file as one long string'
 #print(open_and_read_file('green-eggs.txt'))
 
@@ -42,23 +40,29 @@ def make_chains(text_string):
         >>> chains[('there','juanita')]
         [None]
     """
-
     chains = {}
     #takes long content string and makes a word list
     words = contents.split()
-    print(words)
+    print("words = ", words)
+    
     #split up the string into pairs of words that overlap
     for i in range(len(words)-1):#loop over every two pair of words in contents
         #add each tuple as a key in our dictionary
-   #     for key, value in chains: #dedicated to iterating over items in a collection which we don't have
         key = (words[i], words[i+1])
         value = []
         chains[key] = value
+       
         #is this key alrady in my dict
         #if yes, append to the list instead of creating a new list
+    print("line 57=", chains)
+    for i in range (len(words)-2):
+        #print("inside of i in range len(chains-2)")
+        chains[key] = chains.get(key, [])
+        # print("These words we want to add as values: ", words[i + 2])
+        chains[key].append(words[i+2])
         
     #so each two words are the key and the value is a list of all possible following words
-    print(chains)
+    print("This is chains: ", chains)
 
     return chains
 
