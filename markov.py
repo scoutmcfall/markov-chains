@@ -1,7 +1,7 @@
 """Generate Markov text from text files."""
 
 from random import choice
-contents = open("green-eggs.txt").read() #opens entire file
+contents = open("short-green-eggs.txt").read() #opens entire file
 
 def open_and_read_file(file_path):
     """Take file path as string; return text as string.
@@ -42,29 +42,31 @@ def make_chains(text_string):
     """
     chains = {}
     #takes long content string and makes a word list
-    words = contents.split()
-    print("words = ", words)
+    words1 = contents.split()
+    #print("words = ", words)
     
     #split up the string into pairs of words that overlap
-    for i in range(len(words)-1):#loop over every two pair of words in contents
+    for i in range(len(words1)-1):#loop over every two pair of words in contents
         #add each tuple as a key in our dictionary
-        key = (words[i], words[i+1])
+        key = (words1[i], words1[i+1])
         value = []
         chains[key] = value
-       
-        #is this key alrady in my dict
-        #if yes, append to the list instead of creating a new list
-    print("line 57=", chains)
-    for i in range (len(words)-2):
+        
+    #print("Our final dictionary = ", chains) #test
+    
+    for i in range(len(words1)-2): #supposed to start with the word "would"
         #print("inside of i in range len(chains-2)")
-        chains[key] = chains.get(key, [])
-        # print("These words we want to add as values: ", words[i + 2])
-        chains[key].append(words[i+2])
+        #print("This is the number of iterations to make: " , i)
+        key = (words1[i], words1[i + 1])
+        chains[key] = chains.get(key, []) #why is this starting with the last key?
+        chains[key].append(words1[i+2])
+        #print("Here's each key and the word we're appending to value list: ", key, words[i+2]) #test that shows we're only evaluating the last key
         
     #so each two words are the key and the value is a list of all possible following words
-    print("This is chains: ", chains)
+    #print("This is chains: ", chains)
 
     return chains
+
 
 def make_text(chains):
     """Return text from chains."""
@@ -78,7 +80,7 @@ def make_text(chains):
     return ' '.join(words)
 
 
-input_path = 'green-eggs.txt'
+input_path = 'short-green-eggs.txt'
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
