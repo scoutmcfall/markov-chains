@@ -9,10 +9,13 @@ def open_and_read_file(file_path):
     Takes a string that is a file path, opens the file, and turns
     the file's contents as one string of text.
     """
+    #iterate through the text file and concat each line as a string to the previous string
+    
+    contents = open(file_path).read() #opens entire file
+    
+    return contents #'Contents of your file as one long string'
+print(open_and_read_file('green-eggs.txt'))
 
-    # your code goes here
-
-    return 'Contents of your file as one long string'
 
 
 def make_chains(text_string):
@@ -41,7 +44,9 @@ def make_chains(text_string):
     """
 
     chains = {}
-
+    #split up the string into pairs of words that overlap
+    #then iterate through each pair (do we use dictionary.get())
+    #so each two words are the key and the value is a list of all possible following words
     # your code goes here
 
     return chains
@@ -51,8 +56,10 @@ def make_text(chains):
     """Return text from chains."""
 
     words = []
+    # let random pick next words based on the key tuple
+    # output some possible completed lines
+    # return the joined words (completed lines)
 
-    # your code goes here
 
     return ' '.join(words)
 
