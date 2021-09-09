@@ -48,24 +48,30 @@ def make_chains(text_string):
     #split up the string into pairs of words that overlap
     for i in range(len(words1)-1):#loop over every two pair of words in contents
         #add each tuple as a key in our dictionary
+        
         key = (words1[i], words1[i+1])
+       
         value = []
         chains[key] = value
+        print("chains[key]: ", chains[key])
+        #print("key list: ", key_list)
         
     #print("Our final dictionary = ", chains) #test
-    
+    key_list = []
     for i in range(len(words1)-2): #supposed to start with the word "would"
         #print("inside of i in range len(chains-2)")
         #print("This is the number of iterations to make: " , i)
         key = (words1[i], words1[i + 1])
-        chains[key] = chains.get(key, []) #why is this starting with the last key?
+        chains[key] = chains.get(key, []) #why was this starting with the last key?
         chains[key].append(words1[i+2])
+        key_list.append(words1[i])
+        key_list.append(words1[i + 1])
         #print("Here's each key and the word we're appending to value list: ", key, words[i+2]) #test that shows we're only evaluating the last key
-        
+    print("key list: ", key_list)   
     #so each two words are the key and the value is a list of all possible following words
     #print("This is chains: ", chains)
 
-    return chains
+    return chains, key_list
 
 
 def make_text(chains):
@@ -73,10 +79,18 @@ def make_text(chains):
 
     words = []
     # let random pick next words based on the key tuple
-    # output some possible completed lines
-    # return the joined words (completed lines)
-
-
+    #make keys into list, then use choice to get a random key
+    random_key = choice(key_list)
+    #append random key into words list
+    #output some possible completed lines
+    
+    #where the loop starts
+    #search for the random key in the dictionary (last two words of the words list)
+    #use choice on the value of random key to get a random value
+    #append random value to words list
+    #start over again using the last two words in words list [-2::-1] as a key to search for
+   
+    #return the joined words (completed lines)
     return ' '.join(words)
 
 
